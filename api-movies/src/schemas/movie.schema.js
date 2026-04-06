@@ -13,6 +13,5 @@ export const validateMovieSchema = (movie) => {
 }
 
 export const validatePartialMovieSchema = (movie) => {
-
     return movieSchema.partial().safeParse(movie)
 }
