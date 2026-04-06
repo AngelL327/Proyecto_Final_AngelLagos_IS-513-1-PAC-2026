@@ -1,45 +1,119 @@
-### consultar todas las peliculas
-GET http://localhost:4321/movies
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJwcm9mZXNvciIsImlhdCI6MTc3NTQ1NTM5NCwiZXhwIjoxNzc1NDkxMzk0fQ.5jje-05f3yG6hnxnbtd2wEhCxuNA_97YpiaHfR-sXXg
-
-### consultar una pelicula por id
-GET http://localhost:4321/movies/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJwcm9mZXNvciIsImlhdCI6MTc3NTQ1NTM5NCwiZXhwIjoxNzc1NDkxMzk0fQ.5jje-05f3yG6hnxnbtd2wEhCxuNA_97YpiaHfR-sXXg
-
-### crear
-POST http://localhost:3000/movies
-Content-Type:   application/json
+### Registrar usuario (bcrypt)
+POST http://localhost:4321/auth/register
+Content-Type: application/json
 
 {
-    "title": "The Matrix Recargado",
-    "director": [2,3],
-    "posterUrl": "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
-    "genre": [
-        1,2
-    ]
+  "username": "nuevo_usuario",
+  "email": "nuevo_usuario@clase.edu",
+  "password": "miPasswordSeguro123"
 }
 
-### eliminar
-DELETE http://localhost:3000/movies/1234
-
-### actualizar
-PUT http://localhost:3000/movies/1234
-Content-Type:   application/json
-
-{
-    "title": "The Matrix Reloaded",
-    "director": [4,6]
-}
-
-### eliminar un recurso
-DELETE http://localhost:3000/movies/1234
-
-
-### login de usuario 
+### Login usuario (token JWT)
 POST http://localhost:4321/auth/login
-Content-Type:   application/json
+Content-Type: application/json
 
 {
-    "username": "profesor",
-    "password": "hash_falso_123"
+    "username": "nuevo_usuario",
+    "password": "miPasswordSeguro123"
 }
+
+### Consultar todas las peliculas (requiere JWT)
+GET http://localhost:4321/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+### Consultar pelicula por id (requiere JWT)
+GET http://localhost:4321/movies/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+### Crear pelicula (requiere JWT)
+POST http://localhost:4321/movies
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+    "title": "Scary Movie 3",
+    "release_year": 2003,
+    "synopsis": "Una parodia de las películas de terror populares en ese momento, como 'The Ring' y 'The Matrix'.",
+    "genres": [1,2],
+    "directors": [2,3]
+}
+
+### Actualizar pelicula (requiere JWT)
+PUT http://localhost:4321/movies/5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+
+    "title": "The Matrix Reloaded",
+    "directors": [4,6]
+}
+
+### Eliminar pelicula (requiere JWT)
+DELETE http://localhost:4321/movies/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+### Crear director (requiere JWT)
+POST http://localhost:4321/directors
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+    "full_name": "Guillermo del Toro"
+}
+### Relacionar con director 
+PUT http://localhost:4321/movies/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+  "directors": [3,4,5]
+}
+
+
+### Actualizar director (requiere JWT)
+PUT http://localhost:4321/directors/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+    "full_name": "Steven Spielberg"
+}
+
+### Eliminar director (requiere JWT)
+DELETE http://localhost:4321/directors/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+### Probar token en endpoint de prueba
+GET http://localhost:4321/test-db
+Authorization: Bearer 
+
+### Consultar todos los géneros (requiere JWT)
+GET http://localhost:4321/genres
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+### Consultar género por id (requiere JWT)
+GET http://localhost:4321/genres/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+### Crear género (requiere JWT)
+POST http://localhost:4321/genres
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+    "name": "Apocaliptico / Post-apocaliptico"
+}
+
+### Actualizar género (requiere JWT)
+PUT http://localhost:4321/genres/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+
+{
+    "name": "Apocaliptico / Post-apocaliptico / Distopico"
+}
+
+### Eliminar género (requiere JWT)
+DELETE http://localhost:4321/genres/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk

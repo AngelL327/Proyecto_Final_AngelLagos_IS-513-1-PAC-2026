@@ -1,23 +1,56 @@
 import Auth from "../service/auth.js"
 import jwt from 'jsonwebtoken';
+const SALT_ROUNDS = 10
 
 export default class AuthController {
+    static register = async (req, res) => {
+        const { username, email, password } = req.body
 
+        if (!username || !email || !password) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Debe enviar username, email y password'
+            })
+        }
+
+        try {
+            const users = await User.findUserByUsername(username)
+            const existingUser = users[0]
+
+            if (existingUser) {
+                return res.status(409).json({
+                    status: 'error',
+                    message: 'El usuario ya existe'
+                })
+            }
+
+            const password_hash = await bcrypt.hash(password, SALT_ROUNDS)
+            await User.create({ username, email, password_hash })
+
+            return res.status(201).json({
+                status: 'success',
+                message: 'Usuario registrado correctamente'
+            })
+        } catch (e) {
+            return res.status(500).json({
+                status: 'error',
+                message: 'Error al registrar el usuario',
+                error: e.message
+            })
+        }
+    }
 
     static login = async (req, res) => {
-
-
         const { username, password } = req.body
 
         if (!username || !password) {
             return res.status(400).json({
                 status: 'error',
-                message: 'Debe enviar los datos de inicio de sesión'
+                message: 'Debe enviar los datos de inicio de sesion'
             })
         }
 
         try {
-
             const [user] = await Auth.login({ username })
 
             if (!user) {
@@ -27,18 +60,15 @@ export default class AuthController {
                 })
             }
 
-            //validar que la clave sea correcta
-            //TODO: mecanismo de creación de hash de contraseña
+            const isValidPassword = await bcrypt.compare(password, user.password_hash)
 
-            //! IMPOETANTE, ESTO ES TEMPORAL, SE DEBE COMPRAR CON UNA COTRASENIA REAL HASEADA, INTEGRANDO ARGON2 O BCRYPT
-            if (password !== user.password_hash) {
+            if (!isValidPassword) {
                 return res.status(404).json({
                     status: 'error',
                     message: 'Credenciales incorrectas'
                 })
             }
 
-            // generar el token
             const dataToken = {
                 issuer: 'midominio.com',
                 username: user.username
@@ -48,28 +78,21 @@ export default class AuthController {
                 expiresIn: '10h'
             })
 
-
-            // responder al usuario
-            res.json(
-                {
-                    status: 'success',
-                    message: 'Bienvenido',
-                    data: {
-                        user: user.username,
-                        email: user.email,
-                        token
-                    }
+            return res.json({
+                status: 'success',
+                message: 'Bienvenido',
+                data: {
+                    user: user.username,
+                    email: user.email,
+                    token
                 }
-            )
-
-
-        } catch {
-
+            })
+        } catch (e) {
             return res.status(500).json({
                 status: 'error',
-                message: 'Error al realizar la consulta'
+                message: 'Error al realizar la consulta',
+                error: e.message
             })
         }
     }
-
 }

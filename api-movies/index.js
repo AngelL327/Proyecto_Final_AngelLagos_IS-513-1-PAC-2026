@@ -2,11 +2,12 @@
 import express from 'express'
 import moviesRouter from './src/routes/movies.routes.js'
 import { isAuth } from './src/middlewares/isAuth.js'
-import dotenv from 'dotenv'
 import { loadEnvFile } from 'node:process'
 import authsRoutes from './src/routes/auth.routes.js'
+import genreRouter from './src/routes/genre.routes.js'
+import directorRouter from './src/routes/actor.routes.js'
+import { pool } from './src/config/db.js'
 
-// dotenv.config() // carga las variables de entorno (.env)
 loadEnvFile()
 
 // const server = createserver((req, res)=>{})
@@ -20,7 +21,23 @@ const PORT = process.env.PORT || 4321
 // e inyectarlo en el objeto body de l a request
 app.use(express.json())
 
-
+app.get('/test-db', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM users')
+    res.json({
+      status: 'success',
+      message: 'Conexión a DB correcta',
+      data: rows
+    })
+  } catch (err) {
+    console.error('Error en DB:', err)
+    res.status(500).json({
+      status: 'error',
+      message: 'No se pudo conectar a la base de datos',
+      error: err.message
+    })
+  }
+})
 //definir las rutas
 app.get('/', (req, res) => {
     res.send('<h1>Hola mundo</h1>')
@@ -28,6 +45,8 @@ app.get('/', (req, res) => {
 
 //aqui, se define el punto de entrada (endpoint) "/movies"
 app.use('/movies', isAuth, moviesRouter)
+app.use('/genres', isAuth, genreRouter)
+app.use('/directors', isAuth, directorRouter)
 app.use('/auth', authsRoutes)
 
 app.listen(PORT, () => {
