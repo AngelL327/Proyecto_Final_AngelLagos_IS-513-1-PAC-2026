@@ -23,6 +23,20 @@ export default class Genre {
 
         return await Genre.find(result.insertId)
     }
+    
+    static update = async (id, { name }) => {
+        await pool.query(
+            'UPDATE genres SET name = ? WHERE id = ?',
+            [name, id]
+        )
+
+        return await Genre.find(id)
+    }
+
+    static delete = async (id) => {
+        await pool.query('DELETE FROM movie_genres WHERE genre_id = ?', [id])
+        await pool.query('DELETE FROM genres WHERE id = ?', [id])
+    }
 
 
 
