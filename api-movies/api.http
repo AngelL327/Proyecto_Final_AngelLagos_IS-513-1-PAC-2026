@@ -54,15 +54,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvb
 ### Crear director (requiere JWT)
 POST http://localhost:4321/directors
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
 
 {
-    "full_name": "Guillermo del Toro"
+    "full_name": "Clint Eastwood"
 }
 ### Relacionar con director 
 PUT http://localhost:4321/movies/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
 
 {
   "directors": [3,4,5]
