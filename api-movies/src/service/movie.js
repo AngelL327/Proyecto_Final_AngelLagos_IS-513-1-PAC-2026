@@ -59,6 +59,50 @@ export default class Movie {
 
         return rows[0] || null
     }
+    static create = async (movie) => {
+        const connection = await pool.getConnection()
+
+        try {
+            await connection.beginTransaction()
+            const {
+                title,
+                release_year,
+                synopsis,
+                genres = [],
+                directors = []
+            } = movie
+
+            const [result] = await connection.query(
+                'INSERT INTO movies(title, release_year, synopsis) VALUES(?,?,?)',
+                [title, release_year, synopsis]
+            )
+            const id = result.insertId
+
+            if (genres.length > 0) {
+                const genreValues = genres.map((genreId) => [id, genreId])
+                await connection.query(
+                    'INSERT INTO movie_genres(movie_id, genre_id) VALUES ?',
+                    [genreValues]
+                )
+            }
+
+            if (directors.length > 0) {
+                const directorValues = directors.map((directorId) => [id, directorId])
+                await connection.query(
+                    'INSERT INTO movie_directors(movie_id, director_id) VALUES ?',
+                    [directorValues]
+                )
+            }
+
+            await connection.commit()
+            return await Movie.find(id)
+        } catch (error) {
+            await connection.rollback()
+            throw error
+        } finally {
+            connection.release()
+        }
+    }
 
     static update = async (id, movie) => {
         const connection = await pool.getConnection()
