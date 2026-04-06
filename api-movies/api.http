@@ -3,9 +3,9 @@ POST http://localhost:4321/auth/register
 Content-Type: application/json
 
 {
-  "username": "nuevo_usuario",
-  "email": "nuevo_usuario@clase.edu",
-  "password": "miPasswordSeguro123"
+  "username": "Arquitecto",
+  "email": "arquitecto@clase.edu",
+  "password": "miPasswo21"
 }
 
 ### Login usuario (token JWT)
