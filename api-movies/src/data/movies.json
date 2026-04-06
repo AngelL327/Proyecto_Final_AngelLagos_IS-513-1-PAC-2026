@@ -1,0 +1,9 @@
+[
+  {
+    "id": "1234",
+    "title": "The Matrix",
+    "director": ["Lana Wachowski", "Lilly Wachowski"],
+    "posterUrl": "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
+    "genre": ["action", "Sci-fi"]
+  }
+]

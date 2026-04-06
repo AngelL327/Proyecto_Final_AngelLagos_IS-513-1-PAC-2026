@@ -1,0 +1,45 @@
+### consultar todas las peliculas
+GET http://localhost:4321/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJwcm9mZXNvciIsImlhdCI6MTc3NTQ1NTM5NCwiZXhwIjoxNzc1NDkxMzk0fQ.5jje-05f3yG6hnxnbtd2wEhCxuNA_97YpiaHfR-sXXg
+
+### consultar una pelicula por id
+GET http://localhost:4321/movies/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJwcm9mZXNvciIsImlhdCI6MTc3NTQ1NTM5NCwiZXhwIjoxNzc1NDkxMzk0fQ.5jje-05f3yG6hnxnbtd2wEhCxuNA_97YpiaHfR-sXXg
+
+### crear
+POST http://localhost:3000/movies
+Content-Type:   application/json
+
+{
+    "title": "The Matrix Recargado",
+    "director": [2,3],
+    "posterUrl": "https://m.media-amazon.com/images/I/51EG732BV3L.jpg",
+    "genre": [
+        1,2
+    ]
+}
+
+### eliminar
+DELETE http://localhost:3000/movies/1234
+
+### actualizar
+PUT http://localhost:3000/movies/1234
+Content-Type:   application/json
+
+{
+    "title": "The Matrix Reloaded",
+    "director": [4,6]
+}
+
+### eliminar un recurso
+DELETE http://localhost:3000/movies/1234
+
+
+### login de usuario 
+POST http://localhost:4321/auth/login
+Content-Type:   application/json
+
+{
+    "username": "profesor",
+    "password": "hash_falso_123"
+}
