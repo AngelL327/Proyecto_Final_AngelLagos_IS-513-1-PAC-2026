@@ -13,22 +13,20 @@ POST http://localhost:4321/auth/login
 Content-Type: application/json
 
 {
-    "username": "nuevo_usuario",
-    "password": "miPasswordSeguro123"
+    "username": "Arquitecto",
+    "password": "miPasswo21"
 }
 
 ### Consultar todas las peliculas (requiere JWT)
 GET http://localhost:4321/movies
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
 ### Consultar pelicula por id (requiere JWT)
 GET http://localhost:4321/movies/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
 ### Crear pelicula (requiere JWT)
 POST http://localhost:4321/movies
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
 
 {
     "title": "Scary Movie 3",

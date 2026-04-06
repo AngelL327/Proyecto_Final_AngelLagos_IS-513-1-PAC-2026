@@ -1,5 +1,7 @@
-import Auth from "../service/auth.js"
-import jwt from 'jsonwebtoken';
+import Auth from '../service/auth.js'
+import User from './user.controller.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 const SALT_ROUNDS = 10
 
 export default class AuthController {
