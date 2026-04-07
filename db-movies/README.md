@@ -36,13 +36,7 @@ La base de datos `db_movies_unah` contiene las siguientes tablas:
 - **movie_genres**: Relación muchos-a-muchos entre películas y géneros
 - **movie_directors**: Relación muchos-a-muchos entre películas y directores
 
-## Datos de Prueba
 
-Se incluyen datos de prueba con:
-- 2 usuarios de ejemplo
-- 4 géneros (Ciencia Ficción, Acción, Drama, Crimen)
-- 4 directores (Christopher Nolan, Quentin Tarantino, Lana Wachowski, Lilly Wachowski)
-- 3 películas (Inception, Pulp Fiction, The Matrix)
 
 ## Consultas Útiles
 
@@ -72,4 +66,3 @@ Para detener el contenedor, ejecuta:
 docker compose down
 ```
 
-Esto detendrá y eliminará el contenedor, pero conservará los datos en el volumen persistente.
