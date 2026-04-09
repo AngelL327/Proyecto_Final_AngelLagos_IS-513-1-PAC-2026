@@ -49,6 +49,27 @@ app.use('/genres', isAuth, genreRouter)
 app.use('/directors', isAuth, directorRouter)
 app.use('/auth', authsRoutes)
 
+// Manejo de error de JSON inválido (express.json / body-parser)
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'JSON inválido en el body. Revisa comas, llaves y que no haya texto extra después del JSON.'
+    })
+  }
+
+  return next(err)
+})
+
+// Fallback de errores en JSON (evita respuestas HTML por defecto)
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(err.status || 500).json({
+    status: 'error',
+    message: err.message || 'Error interno del servidor'
+  })
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })

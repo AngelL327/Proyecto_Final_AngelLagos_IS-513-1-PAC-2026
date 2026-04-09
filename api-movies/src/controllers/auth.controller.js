@@ -1,5 +1,5 @@
 import Auth from '../service/auth.js'
-import User from './user.controller.js'
+import User from '../service/user.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 const SALT_ROUNDS = 10
