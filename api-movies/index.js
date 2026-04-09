@@ -17,8 +17,6 @@ const PORT = process.env.PORT || 4321
 
 // middlewares
 
-//capturar los datos que vienen en la peticion y convertirlos a formato json
-// e inyectarlo en el objeto body de l a request
 app.use(express.json())
 
 app.get('/test-db', async (req, res) => {
@@ -61,7 +59,7 @@ app.use((err, req, res, next) => {
   return next(err)
 })
 
-// Fallback de errores en JSON (evita respuestas HTML por defecto)
+// 
 app.use((err, req, res, next) => {
   console.error(err)
   res.status(err.status || 500).json({

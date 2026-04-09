@@ -1,8 +1,7 @@
-@baseUrl = http://localhost:4321
-@token = 
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzU3MDkyLCJleHAiOjE3NzU3OTMwOTJ9.vp47laRY1hs2pFLfQLZdSo6xpqLsUtzm_seogh9nx8I
 ### Registrar usuario (bcrypt)
-POST {{baseUrl}}/auth/register
+
+POST http://localhost:4321/auth/register
 Content-Type: application/json
 
 {
@@ -12,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Login usuario (token JWT)
-POST {{baseUrl}}/auth/login
+POST http://localhost:4321/auth/login
 Content-Type: application/json
 
 {
@@ -21,17 +20,15 @@ Content-Type: application/json
 }
 
 ### Consultar todas las peliculas (requiere JWT)
-GET {{baseUrl}}/movies
+GET http://localhost:4321/movies
 Authorization: Bearer {{token}}
-
 ### Consultar pelicula por id (requiere JWT)
-GET {{baseUrl}}/movies/2
-Authorization: Bearer {{token}}
-
+GET http://localhost:4321/movies/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzU1OTk0LCJleHAiOjE3NzU3OTE5OTR9.R_oypDFh9fT3hN0kFYZJs7T3Hu56XfdBjjXY-eRhhxo
 ### Crear pelicula (requiere JWT)
-POST {{baseUrl}}/movies
+POST http://localhost:4321/movies
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
 
 {
     "title": "Scary Movie 3",
@@ -64,7 +61,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvb
 {
     "full_name": "Clint Eastwood"
 }
-
 ### Relacionar con director 
 PUT http://localhost:4321/movies/3
 Content-Type: application/json
