@@ -1,5 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzYwMDI3LCJleHAiOjE3NzU3OTYwMjd9.aX8WifbHf1xfvgZtc6ur13f5DNWHm6MWlSX7hsoZXu8
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzY4NDY1LCJleHAiOjE3NzU4MDQ0NjV9.FAGgYpTCget5cdWYr0jSS0TvG_WDjbZGMlLk2UjzS1U
 POST http://localhost:4321/auth/register
 Content-Type: application/json
 
@@ -49,7 +48,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Eliminar pelicula (requiere JWT)
-DELETE http://localhost:4321/movies/7
+DELETE http://localhost:4321/movies/
 Authorization: Bearer {{token}}
 
 ### Crear director (requiere JWT)
@@ -60,13 +59,13 @@ Authorization: Bearer {{token}}
 {
     "full_name": "Martin Scorsese"
 }
-### Relacionar con director 
-PUT http://localhost:4321/movies/3
+###  Relacionar con director 
+PUT http://localhost:4321/movies/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "directors": [3,4,5]
+  "directors": [3]
 }
 
 
@@ -80,7 +79,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Eliminar director (requiere JWT)
-DELETE http://localhost:4321/directors/8
+DELETE http://localhost:4321/directors/3
 Authorization: Bearer {{token}}
 
 ### Probar token en endpoint de prueba
@@ -114,5 +113,5 @@ Authorization: Bearer {{token}}
 }
 
 ### Eliminar género (requiere JWT)
-DELETE http://localhost:4321/genres/5
+DELETE http://localhost:4321/genres/2
 Authorization: Bearer {{token}}

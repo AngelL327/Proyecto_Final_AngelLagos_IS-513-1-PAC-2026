@@ -1,5 +1,25 @@
 import Movie from '../service/movie.js'
 import { validateMovieSchema, validatePartialMovieSchema } from '../schemas/movie.schema.js'
+import { pool } from '../config/db.js'
+
+const getMissingIds = async (table, ids) => {
+    const uniqueIds = [...new Set(ids)]
+
+    if (uniqueIds.length === 0) return []
+
+    if (table !== 'genres' && table !== 'directors') {
+        throw new Error('Tabla inválida')
+    }
+
+    const placeholders = uniqueIds.map(() => '?').join(', ')
+    const [rows] = await pool.query(
+        `SELECT id FROM ${table} WHERE id IN (${placeholders})`,
+        uniqueIds
+    )
+
+    const existingIds = new Set(rows.map((row) => Number(row.id)))
+    return uniqueIds.filter((id) => !existingIds.has(id))
+}
 
 const formatMovie = (movie) => ({
     ...movie,
@@ -74,6 +94,22 @@ export const create = async (req, res) => {
     }
 
     try {
+        const [missingGenres, missingDirectors] = await Promise.all([
+            getMissingIds('genres', data.genres),
+            getMissingIds('directors', data.directors)
+        ])
+
+        if (missingGenres.length > 0 || missingDirectors.length > 0) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Existen IDs de géneros o directores que no existen',
+                errors: {
+                    missing_genres: missingGenres,
+                    missing_directors: missingDirectors
+                }
+            })
+        }
+
         const newMovie = await Movie.create(data)
 
         return res.status(201).json({
@@ -109,6 +145,24 @@ export const update = async (req, res) => {
             return res.status(404).json({
                 status: 'error',
                 message: 'Pelicula no encontrada'
+            })
+        }
+
+        const missingGenres = data.genres !== undefined
+            ? await getMissingIds('genres', data.genres)
+            : []
+        const missingDirectors = data.directors !== undefined
+            ? await getMissingIds('directors', data.directors)
+            : []
+
+        if (missingGenres.length > 0 || missingDirectors.length > 0) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Existen IDs de géneros o directores que no existen',
+                errors: {
+                    missing_genres: missingGenres,
+                    missing_directors: missingDirectors
+                }
             })
         }
 

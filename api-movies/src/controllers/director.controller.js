@@ -1,5 +1,6 @@
 import Director from '../service/director.js'
 import { validateDirectorSchema } from '../schemas/director.schema.js'
+import { pool } from '../config/db.js'
 
 export const getAll = async (req, res) => {
     try {
@@ -122,6 +123,18 @@ export const deleteDirector = async (req, res) => {
             })
         }
 
+        const [relations] = await pool.query(
+            'SELECT 1 FROM movie_directors WHERE director_id = ? LIMIT 1',
+            [req.params.id]
+        )
+
+        if (relations.length > 0) {
+            return res.status(409).json({
+                status: 'error',
+                message: 'No se puede eliminar el director porque está relacionado a una o más películas'
+            })
+        }
+
         await Director.delete(req.params.id)
 
         return res.json({
@@ -136,4 +149,3 @@ export const deleteDirector = async (req, res) => {
         })
     }
 }
-

@@ -1,5 +1,6 @@
 import Genre from '../service/genre.js'
 import { validateGenreSchema } from '../schemas/genre.schema.js'
+import { pool } from '../config/db.js'
 
 export const getAll = async (req, res) => {
     try {
@@ -119,6 +120,18 @@ export const deleteGenre = async (req, res) => {
             return res.status(404).json({
                 status: 'error',
                 message: 'Genero no encontrado'
+            })
+        }
+
+        const [relations] = await pool.query(
+            'SELECT 1 FROM movie_genres WHERE genre_id = ? LIMIT 1',
+            [req.params.id]
+        )
+
+        if (relations.length > 0) {
+            return res.status(409).json({
+                status: 'error',
+                message: 'No se puede eliminar el genero porque está relacionado a una o más películas'
             })
         }
 
