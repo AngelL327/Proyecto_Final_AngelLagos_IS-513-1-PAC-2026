@@ -1,4 +1,5 @@
 import Director from '../service/director.js'
+import { validateDirectorSchema } from '../schemas/director.schema.js'
 
 export const getAll = async (req, res) => {
     try {
@@ -44,16 +45,18 @@ export const getById = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    const { full_name } = req.body
+    const validation = validateDirectorSchema(req.body)
 
-    if (!full_name) {
+    if (!validation.success) {
         return res.status(400).json({
             status: 'error',
-            message: 'Debe enviar el nombre del director'
+            message: 'Verifique la informacion enviada',
+            errors: validation.error.issues
         })
     }
 
     try {
+        const { full_name } = validation.data
         const director = await Director.create({ full_name })
 
         return res.status(201).json({
@@ -71,12 +74,13 @@ export const create = async (req, res) => {
 }
 
 export const update = async (req, res) => {
-    const { full_name } = req.body
+    const validation = validateDirectorSchema(req.body)
 
-    if (!full_name) {
+    if (!validation.success) {
         return res.status(400).json({
             status: 'error',
-            message: 'Debe enviar el nombre del director'
+            message: 'Datos incorrectos',
+            errors: validation.error.issues
         })
     }
 
@@ -90,6 +94,7 @@ export const update = async (req, res) => {
             })
         }
 
+        const { full_name } = validation.data
         const director = await Director.update(req.params.id, { full_name })
 
         return res.json({
@@ -131,5 +136,4 @@ export const deleteDirector = async (req, res) => {
         })
     }
 }
-
 

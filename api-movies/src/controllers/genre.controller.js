@@ -1,4 +1,5 @@
 import Genre from '../service/genre.js'
+import { validateGenreSchema } from '../schemas/genre.schema.js'
 
 export const getAll = async (req, res) => {
     try {
@@ -44,16 +45,18 @@ export const getById = async (req, res) => {
 }
 
 export const create = async (req, res) => {
-    const { name } = req.body
+    const validation = validateGenreSchema(req.body)
 
-    if (!name) {
+    if (!validation.success) {
         return res.status(400).json({
             status: 'error',
-            message: 'Debe enviar el nombre del genero'
+            message: 'Verifique la informacion enviada',
+            errors: validation.error.issues
         })
     }
 
     try {
+        const { name } = validation.data
         const genre = await Genre.create({ name })
 
         return res.status(201).json({
@@ -71,12 +74,13 @@ export const create = async (req, res) => {
 }
 
 export const update = async (req, res) => {
-    const { name } = req.body
+    const validation = validateGenreSchema(req.body)
 
-    if (!name) {
+    if (!validation.success) {
         return res.status(400).json({
             status: 'error',
-            message: 'Debe enviar el nombre del genero'
+            message: 'Datos incorrectos',
+            errors: validation.error.issues
         })
     }
 
@@ -90,6 +94,7 @@ export const update = async (req, res) => {
             })
         }
 
+        const { name } = validation.data
         const genre = await Genre.update(req.params.id, { name })
 
         return res.json({

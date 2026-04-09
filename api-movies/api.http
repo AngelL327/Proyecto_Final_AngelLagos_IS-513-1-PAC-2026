@@ -1,5 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzU3MDkyLCJleHAiOjE3NzU3OTMwOTJ9.vp47laRY1hs2pFLfQLZdSo6xpqLsUtzm_seogh9nx8I
-### Registrar usuario (bcrypt)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzYwMDI3LCJleHAiOjE3NzU3OTYwMjd9.aX8WifbHf1xfvgZtc6ur13f5DNWHm6MWlSX7hsoZXu8
 
 POST http://localhost:4321/auth/register
 Content-Type: application/json
@@ -24,11 +23,11 @@ GET http://localhost:4321/movies
 Authorization: Bearer {{token}}
 ### Consultar pelicula por id (requiere JWT)
 GET http://localhost:4321/movies/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzU1OTk0LCJleHAiOjE3NzU3OTE5OTR9.R_oypDFh9fT3hN0kFYZJs7T3Hu56XfdBjjXY-eRhhxo
+Authorization: Bearer {{token}}
 ### Crear pelicula (requiere JWT)
 POST http://localhost:4321/movies
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
+Authorization: Bearer {{token}}
 
 {
     "title": "Scary Movie 3",
@@ -39,9 +38,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvb
 }
 
 ### Actualizar pelicula (requiere JWT)
-PUT http://localhost:4321/movies/5
+PUT http://localhost:4321/movies/4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer {{token}}
 
 {
 
@@ -50,21 +49,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvb
 }
 
 ### Eliminar pelicula (requiere JWT)
-DELETE http://localhost:4321/movies/5
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+DELETE http://localhost:4321/movies/7
+Authorization: Bearer {{token}}
 
 ### Crear director (requiere JWT)
 POST http://localhost:4321/directors
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
+Authorization: Bearer {{token}}
 
 {
-    "full_name": "Clint Eastwood"
+    "full_name": "Martin Scorsese"
 }
 ### Relacionar con director 
 PUT http://localhost:4321/movies/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NDk2NjQzLCJleHAiOjE3NzU1MzI2NDN9.zN9Ssgl9ZmAeqYKcJ-UGSt9rco4sSDSQvr1uaZLd4Lw
+Authorization: Bearer {{token}}
 
 {
   "directors": [3,4,5]
@@ -74,15 +73,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvb
 ### Actualizar director (requiere JWT)
 PUT http://localhost:4321/directors/7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer {{token}}
 
 {
     "full_name": "Steven Spielberg"
 }
 
 ### Eliminar director (requiere JWT)
-DELETE http://localhost:4321/directors/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+DELETE http://localhost:4321/directors/8
+Authorization: Bearer {{token}}
 
 ### Probar token en endpoint de prueba
 GET http://localhost:4321/test-db
@@ -90,30 +89,30 @@ Authorization: Bearer
 
 ### Consultar todos los géneros (requiere JWT)
 GET http://localhost:4321/genres
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer {{token}}
 
 ### Consultar género por id (requiere JWT)
 GET http://localhost:4321/genres/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer {{token}}
 
 ### Crear género (requiere JWT)
 POST http://localhost:4321/genres
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer {{token}}
 
 {
-    "name": "Apocaliptico / Post-apocaliptico"
+    "name": "Sobrenatural"
 }
 
 ### Actualizar género (requiere JWT)
-PUT http://localhost:4321/genres/7
+PUT http://localhost:4321/genres/5
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+Authorization: Bearer {{token}}
 
 {
-    "name": "Apocaliptico / Post-apocaliptico / Distopico"
+    "name": "Post-apocaliptico"
 }
 
 ### Eliminar género (requiere JWT)
-DELETE http://localhost:4321/genres/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJudWV2b191c3VhcmlvIiwiaWF0IjoxNzc1NDQyMzU2LCJleHAiOjE3NzU0NzgzNTZ9.B11O7BgBvTlC-b39VU6DtPxdHc3OqTLwjIbNSaIaCwk
+DELETE http://localhost:4321/genres/5
+Authorization: Bearer {{token}}
