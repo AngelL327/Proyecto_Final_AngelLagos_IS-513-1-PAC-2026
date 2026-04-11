@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1NzY4NDY1LCJleHAiOjE3NzU4MDQ0NjV9.FAGgYpTCget5cdWYr0jSS0TvG_WDjbZGMlLk2UjzS1U
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZXIiOiJtaWRvbWluaW8uY29tIiwidXNlcm5hbWUiOiJBcnF1aXRlY3RvIiwiaWF0IjoxNzc1ODg1OTY2LCJleHAiOjE3NzU5MjE5NjZ9.vdAId3URGHKVR0IyKqFSPBG0d3g73IDM_JbvkLzXRTo
 POST http://localhost:4321/auth/register
 Content-Type: application/json
 
@@ -51,13 +51,17 @@ Authorization: Bearer {{token}}
 DELETE http://localhost:4321/movies/
 Authorization: Bearer {{token}}
 
+### Consultar todos los directores (requiere JWT)
+GET http://localhost:4321/directors
+Authorization: Bearer {{token}}
+
 ### Crear director (requiere JWT)
 POST http://localhost:4321/directors
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "full_name": "Martin Scorsese"
+    "full_name": "Alexander Payne"
 }
 ###  Relacionar con director 
 PUT http://localhost:4321/movies/1
